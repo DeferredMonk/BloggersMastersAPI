@@ -15,8 +15,9 @@ builder.Services.AddControllers()
 builder.Services.AddDbContext<BloggersMastersContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Db")));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 

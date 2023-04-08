@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BloggersMastersAPI.Migrations
 {
     [DbContext(typeof(BloggersMastersContext))]
-    [Migration("20230408103916_InitialDb")]
+    [Migration("20230408130956_InitialDb")]
     partial class InitialDb
     {
         /// <inheritdoc />
@@ -64,8 +64,8 @@ namespace BloggersMastersAPI.Migrations
                         {
                             Id = 1,
                             Content = "One of my greatest achiements is winning a league game!",
-                            CreatedAt = new DateTime(2023, 4, 8, 13, 39, 16, 789, DateTimeKind.Local).AddTicks(635),
-                            ModifiedAt = new DateTime(2023, 4, 8, 13, 39, 16, 789, DateTimeKind.Local).AddTicks(672),
+                            CreatedAt = new DateTime(2023, 4, 8, 16, 9, 56, 308, DateTimeKind.Local).AddTicks(144),
+                            ModifiedAt = new DateTime(2023, 4, 8, 16, 9, 56, 308, DateTimeKind.Local).AddTicks(174),
                             PublicPost = false,
                             Title = "My greatest achievements",
                             UserId = 1
@@ -74,8 +74,8 @@ namespace BloggersMastersAPI.Migrations
                         {
                             Id = 2,
                             Content = "I've currently spent a month looking for a job as a web dev. Lets hope this is the one.",
-                            CreatedAt = new DateTime(2023, 4, 8, 13, 39, 16, 789, DateTimeKind.Local).AddTicks(675),
-                            ModifiedAt = new DateTime(2023, 4, 8, 13, 39, 16, 789, DateTimeKind.Local).AddTicks(677),
+                            CreatedAt = new DateTime(2023, 4, 8, 16, 9, 56, 308, DateTimeKind.Local).AddTicks(178),
+                            ModifiedAt = new DateTime(2023, 4, 8, 16, 9, 56, 308, DateTimeKind.Local).AddTicks(180),
                             PublicPost = true,
                             Title = "Job hunting",
                             UserId = 1
@@ -84,8 +84,8 @@ namespace BloggersMastersAPI.Migrations
                         {
                             Id = 3,
                             Content = "Today I printed hello world to my console, I felt like a hacker!",
-                            CreatedAt = new DateTime(2023, 4, 8, 13, 39, 16, 789, DateTimeKind.Local).AddTicks(679),
-                            ModifiedAt = new DateTime(2023, 4, 8, 13, 39, 16, 789, DateTimeKind.Local).AddTicks(681),
+                            CreatedAt = new DateTime(2023, 4, 8, 16, 9, 56, 308, DateTimeKind.Local).AddTicks(182),
+                            ModifiedAt = new DateTime(2023, 4, 8, 16, 9, 56, 308, DateTimeKind.Local).AddTicks(184),
                             PublicPost = true,
                             Title = "Hello world!",
                             UserId = 2
@@ -94,8 +94,8 @@ namespace BloggersMastersAPI.Migrations
                         {
                             Id = 4,
                             Content = "Finally I master the skills of C#, its time to apply for amazing opportunities!",
-                            CreatedAt = new DateTime(2023, 4, 8, 13, 39, 16, 789, DateTimeKind.Local).AddTicks(683),
-                            ModifiedAt = new DateTime(2023, 4, 8, 13, 39, 16, 789, DateTimeKind.Local).AddTicks(685),
+                            CreatedAt = new DateTime(2023, 4, 8, 16, 9, 56, 308, DateTimeKind.Local).AddTicks(186),
+                            ModifiedAt = new DateTime(2023, 4, 8, 16, 9, 56, 308, DateTimeKind.Local).AddTicks(188),
                             PublicPost = true,
                             Title = "I just finished Noroff's bootcamp!",
                             UserId = 3
@@ -118,6 +118,10 @@ namespace BloggersMastersAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Users");
@@ -127,19 +131,22 @@ namespace BloggersMastersAPI.Migrations
                         {
                             Id = 1,
                             firstName = "Will",
-                            lastName = "Smith"
+                            lastName = "Smith",
+                            username = "WillSmith"
                         },
                         new
                         {
                             Id = 2,
                             firstName = "Peter",
-                            lastName = "Griffin"
+                            lastName = "Griffin",
+                            username = "PeterGriffin"
                         },
                         new
                         {
                             Id = 3,
                             firstName = "Homer",
-                            lastName = "Simpsons"
+                            lastName = "Simpsons",
+                            username = "HomeSimpsons"
                         });
                 });
 
