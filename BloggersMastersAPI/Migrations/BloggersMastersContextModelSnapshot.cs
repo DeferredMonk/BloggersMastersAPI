@@ -30,6 +30,9 @@ namespace BloggersMastersAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("Agrees")
+                        .HasColumnType("int");
+
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -37,7 +40,10 @@ namespace BloggersMastersAPI.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("ModifiedAt")
+                    b.Property<int>("Disagrees")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("PublicPost")
@@ -60,9 +66,11 @@ namespace BloggersMastersAPI.Migrations
                         new
                         {
                             Id = 1,
+                            Agrees = 0,
                             Content = "One of my greatest achiements is winning a league game!",
-                            CreatedAt = new DateTime(2023, 4, 8, 16, 9, 56, 308, DateTimeKind.Local).AddTicks(144),
-                            ModifiedAt = new DateTime(2023, 4, 8, 16, 9, 56, 308, DateTimeKind.Local).AddTicks(174),
+                            CreatedAt = new DateTime(2023, 4, 9, 15, 49, 7, 963, DateTimeKind.Local).AddTicks(6540),
+                            Disagrees = 0,
+                            ModifiedAt = new DateTime(2023, 4, 9, 15, 49, 7, 963, DateTimeKind.Local).AddTicks(6575),
                             PublicPost = false,
                             Title = "My greatest achievements",
                             UserId = 1
@@ -70,9 +78,11 @@ namespace BloggersMastersAPI.Migrations
                         new
                         {
                             Id = 2,
+                            Agrees = 0,
                             Content = "I've currently spent a month looking for a job as a web dev. Lets hope this is the one.",
-                            CreatedAt = new DateTime(2023, 4, 8, 16, 9, 56, 308, DateTimeKind.Local).AddTicks(178),
-                            ModifiedAt = new DateTime(2023, 4, 8, 16, 9, 56, 308, DateTimeKind.Local).AddTicks(180),
+                            CreatedAt = new DateTime(2023, 4, 9, 15, 49, 7, 963, DateTimeKind.Local).AddTicks(6584),
+                            Disagrees = 0,
+                            ModifiedAt = new DateTime(2023, 4, 9, 15, 49, 7, 963, DateTimeKind.Local).AddTicks(6586),
                             PublicPost = true,
                             Title = "Job hunting",
                             UserId = 1
@@ -80,9 +90,11 @@ namespace BloggersMastersAPI.Migrations
                         new
                         {
                             Id = 3,
+                            Agrees = 0,
                             Content = "Today I printed hello world to my console, I felt like a hacker!",
-                            CreatedAt = new DateTime(2023, 4, 8, 16, 9, 56, 308, DateTimeKind.Local).AddTicks(182),
-                            ModifiedAt = new DateTime(2023, 4, 8, 16, 9, 56, 308, DateTimeKind.Local).AddTicks(184),
+                            CreatedAt = new DateTime(2023, 4, 9, 15, 49, 7, 963, DateTimeKind.Local).AddTicks(6590),
+                            Disagrees = 0,
+                            ModifiedAt = new DateTime(2023, 4, 9, 15, 49, 7, 963, DateTimeKind.Local).AddTicks(6591),
                             PublicPost = true,
                             Title = "Hello world!",
                             UserId = 2
@@ -90,9 +102,11 @@ namespace BloggersMastersAPI.Migrations
                         new
                         {
                             Id = 4,
+                            Agrees = 0,
                             Content = "Finally I master the skills of C#, its time to apply for amazing opportunities!",
-                            CreatedAt = new DateTime(2023, 4, 8, 16, 9, 56, 308, DateTimeKind.Local).AddTicks(186),
-                            ModifiedAt = new DateTime(2023, 4, 8, 16, 9, 56, 308, DateTimeKind.Local).AddTicks(188),
+                            CreatedAt = new DateTime(2023, 4, 9, 15, 49, 7, 963, DateTimeKind.Local).AddTicks(6593),
+                            Disagrees = 0,
+                            ModifiedAt = new DateTime(2023, 4, 9, 15, 49, 7, 963, DateTimeKind.Local).AddTicks(6595),
                             PublicPost = true,
                             Title = "I just finished Noroff's bootcamp!",
                             UserId = 3

@@ -40,7 +40,10 @@ namespace BloggersMastersAPI.Services.Classes
 
         public async Task<User> GetById(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users
+                .Include(u => u.Posts)
+                .Where(u => u.Id == id)
+                .SingleOrDefaultAsync();
 
             return user != null ? user : throw new UserNotFoundException();
         }

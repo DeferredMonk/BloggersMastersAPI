@@ -1,5 +1,8 @@
 ﻿namespace BloggersMastersAPI.Models.DTOs.User
 {
+    /// <summary>
+    /// DTO for user creation
+    /// </summary>
     public class UserCreateDto
     {
         public string firstName { get; set; }

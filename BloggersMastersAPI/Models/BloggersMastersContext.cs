@@ -55,6 +55,8 @@ namespace BloggersMastersAPI.Models
                         ModifiedAt = DateTime.Now,
                         PublicPost = false,
                         UserId = 1,
+                        Agrees = 0,
+                        Disagrees = 0
                     },
                     new Post
                     {
@@ -65,6 +67,8 @@ namespace BloggersMastersAPI.Models
                         ModifiedAt = DateTime.Now,
                         PublicPost = true,
                         UserId = 1,
+                        Agrees = 0,
+                        Disagrees = 0
                     },
                     new Post
                     {
@@ -75,6 +79,8 @@ namespace BloggersMastersAPI.Models
                         ModifiedAt = DateTime.Now,
                         PublicPost = true,
                         UserId = 2,
+                        Agrees = 0,
+                        Disagrees = 0
                     },
                     new Post
                     {
@@ -85,6 +91,8 @@ namespace BloggersMastersAPI.Models
                         ModifiedAt = DateTime.Now,
                         PublicPost = true,
                         UserId = 3,
+                        Agrees = 0,
+                        Disagrees = 0
                     }
                 );
         }

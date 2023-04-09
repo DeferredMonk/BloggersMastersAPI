@@ -1,5 +1,4 @@
-﻿using System.Net.Mime;
-using AutoMapper;
+﻿using AutoMapper;
 using BloggersMastersAPI.Expections.User;
 using BloggersMastersAPI.Models.DTOs.User;
 using BloggersMastersAPI.Models.Models;
@@ -9,9 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace BloggersMastersAPI.Controllers
 {
     [Route("api/[controller]")]
-    [ApiConventionType(typeof(DefaultApiConventions))]
-    [Produces(MediaTypeNames.Application.Json)]
-    [Consumes(MediaTypeNames.Application.Json)]
     [ApiController]
     public class UserController : Controller
     {
@@ -76,7 +72,7 @@ namespace BloggersMastersAPI.Controllers
             }
             catch (UserAlreadyExistsException e)
             {
-                return NotFound(new ProblemDetails
+                return BadRequest(new ProblemDetails
                 {
                     Detail = e.Message
                 });

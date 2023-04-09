@@ -1,4 +1,3 @@
-using System.Text.Json.Serialization;
 using BloggersMastersAPI.Models;
 using BloggersMastersAPI.Services.Classes;
 using BloggersMastersAPI.Services.Interfaces;
@@ -8,14 +7,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddDbContext<BloggersMastersContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Db")));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IPostService, PostService>();
 builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
