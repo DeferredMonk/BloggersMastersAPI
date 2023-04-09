@@ -14,9 +14,16 @@ namespace BloggersMastersAPI.Services.Classes
             _context = context;
         }
 
-        public Task<User> Create(User entity)
+        public async Task<User> Create(User entity)
         {
-            throw new NotImplementedException();
+            var userExists = await _context.Users.Where(u => u.username == entity.username).ToListAsync();
+            if (userExists.Any())
+            {
+                throw new UserAlreadyExistsException(entity.username);
+            }
+            await _context.Users.AddAsync(entity);
+            await _context.SaveChangesAsync();
+            return entity;
         }
 
         public Task DeleteById(int id)
@@ -31,9 +38,14 @@ namespace BloggersMastersAPI.Services.Classes
             return users.Count > 0 ? users : throw new UsersNotFoundException();
         }
 
-        public Task<User> GetById(int id)
+        public async Task<User> GetById(int id)
         {
-            throw new NotImplementedException();
+            var user = await _context.Users
+                .Include(u => u.Posts)
+                .Where(u => u.Id == id)
+                .SingleOrDefaultAsync();
+
+            return user != null ? user : throw new UserNotFoundException();
         }
 
         public Task<User> Update(User entity)

@@ -25,19 +25,22 @@ namespace BloggersMastersAPI.Models
                     {
                         Id = 1,
                         firstName = "Will",
-                        lastName = "Smith"
+                        lastName = "Smith",
+                        username = "WillSmith"
                     },
                     new User
                     {
                         Id = 2,
                         firstName = "Peter",
-                        lastName = "Griffin"
+                        lastName = "Griffin",
+                        username = "PeterGriffin"
                     },
                     new User
                     {
                         Id = 3,
                         firstName = "Homer",
-                        lastName = "Simpsons"
+                        lastName = "Simpsons",
+                        username = "HomeSimpsons"
                     }
                 );
             //Dummy posts
@@ -52,6 +55,8 @@ namespace BloggersMastersAPI.Models
                         ModifiedAt = DateTime.Now,
                         PublicPost = false,
                         UserId = 1,
+                        Agrees = 0,
+                        Disagrees = 0
                     },
                     new Post
                     {
@@ -62,6 +67,8 @@ namespace BloggersMastersAPI.Models
                         ModifiedAt = DateTime.Now,
                         PublicPost = true,
                         UserId = 1,
+                        Agrees = 0,
+                        Disagrees = 0
                     },
                     new Post
                     {
@@ -72,6 +79,8 @@ namespace BloggersMastersAPI.Models
                         ModifiedAt = DateTime.Now,
                         PublicPost = true,
                         UserId = 2,
+                        Agrees = 0,
+                        Disagrees = 0
                     },
                     new Post
                     {
@@ -82,6 +91,8 @@ namespace BloggersMastersAPI.Models
                         ModifiedAt = DateTime.Now,
                         PublicPost = true,
                         UserId = 3,
+                        Agrees = 0,
+                        Disagrees = 0
                     }
                 );
         }
