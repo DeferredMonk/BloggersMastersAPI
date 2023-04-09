@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BloggersMastersAPI.Expections.Post;
 using BloggersMastersAPI.Models;
 using BloggersMastersAPI.Models.DTOs.Post;
 using BloggersMastersAPI.Models.Models;
@@ -25,13 +26,23 @@ namespace BloggersMastersAPI.Controllers
 
         // GET: api/Post
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Post>>> GetPosts()
+        public async Task<ActionResult<IEnumerable<PostDto>>> GetPosts(int userId)
         {
-            if (_context.Posts == null)
+            try
             {
-                return NotFound();
+                if (userId != 0)
+                {
+                    return Ok(_mapper.Map<List<PostDto>>(await _PostService.GetAllUserPostsByUserId(userId)));
+                }
+                return Ok(_mapper.Map<List<PostDto>>(await _PostService.GetAll()));
             }
-            return Ok(await _context.Posts.ToListAsync());
+            catch (PostsNotFoundException e)
+            {
+                return NotFound(new ProblemDetails
+                {
+                    Detail = e.Message
+                });
+            }
         }
 
         // GET: api/Post/5
@@ -88,10 +99,18 @@ namespace BloggersMastersAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<PostCreateDto>> PostPost(PostCreateDto post)
         {
-
-            var newPost = await _PostService.Create(_mapper.Map<Post>(post));
-
-            return Created("GetPost", newPost);
+            try
+            {
+                var newPost = await _PostService.Create(_mapper.Map<Post>(post));
+                return Created("GetPost", newPost);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new ProblemDetails
+                {
+                    Detail = e.Message
+                });
+            }
         }
 
         // DELETE: api/Post/5
