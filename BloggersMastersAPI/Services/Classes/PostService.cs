@@ -1,6 +1,8 @@
-﻿using BloggersMastersAPI.Models;
+﻿using BloggersMastersAPI.Expections.Post;
+using BloggersMastersAPI.Models;
 using BloggersMastersAPI.Models.Models;
 using BloggersMastersAPI.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace BloggersMastersAPI.Services.Classes
 {
@@ -23,14 +25,44 @@ namespace BloggersMastersAPI.Services.Classes
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Post>> GetAll()
+        public async Task<IEnumerable<Post>> GetAll()
         {
-            throw new NotImplementedException();
+            var posts = await _context.Posts
+                .Include(p => p.User)
+                .ToListAsync();
+            if (!posts.Any())
+            {
+                throw new PostsNotFoundException();
+            }
+            return posts;
         }
 
-        public Task<Post> GetById(int id)
+        public async Task<ICollection<Post>> GetAllUserPostsByUserId(int id)
         {
-            throw new NotImplementedException();
+            var posts = await _context.Posts
+                .Include(p => p.User)
+                .Where(p => p.UserId == id)
+                .ToListAsync();
+            if (!posts.Any())
+            {
+                throw new PostsNotFoundException();
+            }
+            return posts;
+        }
+
+        public async Task<Post> GetById(int id)
+        {
+            var post = await _context.Posts
+                .Include(p => p.User)
+                .Where(p => p.Id == id)
+                .SingleOrDefaultAsync();
+
+            if (post == null)
+            {
+                throw new PostsNotFoundException();
+            }
+
+            return post;
         }
 
         public Task<Post> Update(Post entity)

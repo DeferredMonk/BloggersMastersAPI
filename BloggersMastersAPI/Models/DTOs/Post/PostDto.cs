@@ -1,4 +1,6 @@
-﻿namespace BloggersMastersAPI.Models.DTOs.Post
+﻿using BloggersMastersAPI.Models.DTOs.User;
+
+namespace BloggersMastersAPI.Models.DTOs.Post
 {
     public class PostDto
     {
@@ -7,6 +9,7 @@
         public string Content { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
+        public UserDto User { get; set; }
         public bool PublicPost { get; set; }
     }
 }

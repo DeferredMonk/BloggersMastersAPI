@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BloggersMastersAPI.Expections.Post;
 using BloggersMastersAPI.Models;
 using BloggersMastersAPI.Models.DTOs.Post;
 using BloggersMastersAPI.Models.Models;
@@ -23,33 +24,47 @@ namespace BloggersMastersAPI.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/Post
+        /// <summary>
+        /// Gets all posts or the posts of a user
+        /// </summary>
+        /// <param name="userId">Id of the wanted user posts</param>
+        /// <returns>List of posts</returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Post>>> GetPosts()
+        public async Task<ActionResult<IEnumerable<PostDto>>> GetPosts(int userId)
         {
-            if (_context.Posts == null)
+            try
             {
-                return NotFound();
+                if (userId != 0)
+                {
+                    return Ok(_mapper.Map<List<PostDto>>(await _PostService.GetAllUserPostsByUserId(userId)));
+                }
+                return Ok(_mapper.Map<List<PostDto>>(await _PostService.GetAll()));
             }
-            return Ok(await _context.Posts.ToListAsync());
+            catch (PostsNotFoundException e)
+            {
+                return NotFound(new ProblemDetails
+                {
+                    Detail = e.Message
+                });
+            }
         }
 
-        // GET: api/Post/5
+        /// <summary>
+        /// Gets a post by id
+        /// </summary>
+        /// <param name="id">Post id</param>
+        /// <returns>Found post</returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<Post>> GetPost(int id)
+        public async Task<ActionResult<PostDto>> GetPost(int id)
         {
-            if (_context.Posts == null)
+            try
             {
-                return NotFound();
+                return _mapper.Map<PostDto>(await _PostService.GetById(id));
             }
-            var post = await _context.Posts.FindAsync(id);
-
-            if (post == null)
+            catch (PostsNotFoundException e)
             {
-                return NotFound();
+                return NotFound(new ProblemDetails { Detail = e.Message });
             }
-
-            return post;
         }
 
         // PUT: api/Post/5
@@ -83,15 +98,26 @@ namespace BloggersMastersAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Post
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="post"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<PostCreateDto>> PostPost(PostCreateDto post)
         {
-
-            var newPost = await _PostService.Create(_mapper.Map<Post>(post));
-
-            return Created("GetPost", newPost);
+            try
+            {
+                var newPost = await _PostService.Create(_mapper.Map<Post>(post));
+                return Created("GetPost", newPost);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new ProblemDetails
+                {
+                    Detail = e.Message
+                });
+            }
         }
 
         // DELETE: api/Post/5
