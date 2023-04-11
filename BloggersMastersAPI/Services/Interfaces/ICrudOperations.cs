@@ -1,4 +1,6 @@
-﻿namespace BloggersMastersAPI.Services.Interfaces
+﻿using Microsoft.AspNetCore.JsonPatch;
+
+namespace BloggersMastersAPI.Services.Interfaces
 {
     public interface ICrudOperations<T, Id>
     {
@@ -24,7 +26,7 @@
         /// </summary>
         /// <param name="entity">Resource with updated values</param>
         /// <returns></returns>
-        Task<T> Update(T entity);
+        Task<T> Update(JsonPatchDocument entity, Id id);
         /// <summary>
         /// Deletes a resource
         /// </summary>

@@ -2,6 +2,7 @@
 using BloggersMastersAPI.Models;
 using BloggersMastersAPI.Models.Models;
 using BloggersMastersAPI.Services.Interfaces;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 
 namespace BloggersMastersAPI.Services.Classes
@@ -29,6 +30,7 @@ namespace BloggersMastersAPI.Services.Classes
         {
             var posts = await _context.Posts
                 .Include(p => p.User)
+                .Where(p => p.PublicPost)
                 .ToListAsync();
             if (!posts.Any())
             {
@@ -65,9 +67,13 @@ namespace BloggersMastersAPI.Services.Classes
             return post;
         }
 
-        public Task<Post> Update(Post entity)
+        public async Task<Post> Update(JsonPatchDocument entity, int Id)
         {
-            throw new NotImplementedException();
+            var postToUpdate = await GetById(Id);
+            entity.ApplyTo(postToUpdate);
+            await _context.SaveChangesAsync();
+
+            return postToUpdate;
         }
     }
 }
