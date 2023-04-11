@@ -19,27 +19,6 @@ builder.Services.AddCors(opt =>
         });
 });
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(opt =>
-    opt.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidIssuer = builder.Configuration["IssuerURI"],
-        ValidAudience = "account",
-
-        IssuerSigningKeyResolver = (token, securityToken, kid, parameters) =>
-        {
-            var client = new HttpClient();
-            string keyuri = builder.Configuration["KeyURI"];
-            //Retrieves the keys from keycloak instance to verify token
-            var response = client.GetAsync(keyuri).Result;
-            var responseString = response.Content.ReadAsStringAsync().Result;
-            var keys = new JsonWebKeySet(responseString);
-
-            return keys.Keys;
-        }
-    });
 
 builder.Services.AddControllers()
     .AddNewtonsoftJson();
@@ -51,10 +30,33 @@ builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IPostService, PostService>();
 builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(opt =>
+    opt.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidIssuer = builder.Configuration["TokenSecrets:IssuerURI"],
+        ValidAudience = "account",
+
+        IssuerSigningKeyResolver = (token, securityToken, kid, parameters) =>
+        {
+
+            var client = new HttpClient();
+            string keyuri = builder.Configuration["TokenSecrets:KeyURI"];
+            //Retrieves the keys from keycloak instance to verify token
+            var response = client.GetAsync(keyuri).Result;
+            var responseString = response.Content.ReadAsStringAsync().Result;
+            Console.WriteLine("asdasdasdas");
+            var keys = new JsonWebKeySet(responseString);
+
+            return keys.Keys;
+
+        }
+    });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -63,6 +65,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
+app.UseCors(myCorsPolicy);
 app.UseAuthorization();
 
 app.MapControllers();
