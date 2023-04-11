@@ -4,8 +4,9 @@ using BloggersMastersAPI.Models;
 using BloggersMastersAPI.Models.DTOs.Post;
 using BloggersMastersAPI.Models.Models;
 using BloggersMastersAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BloggersMastersAPI.Controllers
 {
@@ -25,19 +26,14 @@ namespace BloggersMastersAPI.Controllers
         }
 
         /// <summary>
-        /// Gets all posts or the posts of a user
+        /// Gets all public posts
         /// </summary>
-        /// <param name="userId">Id of the wanted user posts</param>
         /// <returns>List of posts</returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PostDto>>> GetPosts(int userId)
+        public async Task<ActionResult<IEnumerable<PostDto>>> GetPosts()
         {
             try
             {
-                if (userId != 0)
-                {
-                    return Ok(_mapper.Map<List<PostDto>>(await _PostService.GetAllUserPostsByUserId(userId)));
-                }
                 return Ok(_mapper.Map<List<PostDto>>(await _PostService.GetAll()));
             }
             catch (PostsNotFoundException e)
@@ -46,6 +42,25 @@ namespace BloggersMastersAPI.Controllers
                 {
                     Detail = e.Message
                 });
+            }
+        }
+
+        /// <summary>
+        /// Gets all posts of a user by user id
+        /// </summary>
+        /// <param name="id">user id</param>
+        /// <returns>Found posts</returns>
+        [Authorize]
+        [HttpGet("user/{id}")]
+        public async Task<ActionResult<PostDto>> GetPostByUserId(int id)
+        {
+            try
+            {
+                return Ok(_mapper.Map<List<PostDto>>(await _PostService.GetAllUserPostsByUserId(id)));
+            }
+            catch (PostsNotFoundException e)
+            {
+                return NotFound(new ProblemDetails { Detail = e.Message });
             }
         }
 
@@ -69,40 +84,24 @@ namespace BloggersMastersAPI.Controllers
 
         // PUT: api/Post/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPost(int id, Post post)
+        [HttpPatch("{id}")]
+        public async Task<ActionResult<PostDto>> PatchPost(int id, JsonPatchDocument post)
         {
-            if (id != post.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(post).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                return Ok(_mapper.Map<PostDto>(await _PostService.Update(post, id)));
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
-                if (!PostExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound();
             }
-
-            return NoContent();
         }
 
         /// <summary>
-        /// 
+        /// Create a new post
         /// </summary>
-        /// <param name="post"></param>
-        /// <returns></returns>
+        /// <param name="post">New post</param>
+        /// <returns>Created new post</returns>
         [HttpPost]
         public async Task<ActionResult<PostCreateDto>> PostPost(PostCreateDto post)
         {

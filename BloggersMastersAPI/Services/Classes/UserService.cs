@@ -2,6 +2,7 @@
 using BloggersMastersAPI.Models;
 using BloggersMastersAPI.Models.Models;
 using BloggersMastersAPI.Services.Interfaces;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 
 namespace BloggersMastersAPI.Services.Classes
@@ -48,7 +49,7 @@ namespace BloggersMastersAPI.Services.Classes
             return user != null ? user : throw new UserNotFoundException();
         }
 
-        public Task<User> Update(User entity)
+        public Task<User> Update(JsonPatchDocument entity, int Id)
         {
             throw new NotImplementedException();
         }
