@@ -24,7 +24,11 @@ namespace BloggersMastersAPI.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/Post
+        /// <summary>
+        /// Gets all posts or the posts of a user
+        /// </summary>
+        /// <param name="userId">Id of the wanted user posts</param>
+        /// <returns>List of posts</returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PostDto>>> GetPosts(int userId)
         {
@@ -45,22 +49,22 @@ namespace BloggersMastersAPI.Controllers
             }
         }
 
-        // GET: api/Post/5
+        /// <summary>
+        /// Gets a post by id
+        /// </summary>
+        /// <param name="id">Post id</param>
+        /// <returns>Found post</returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<Post>> GetPost(int id)
+        public async Task<ActionResult<PostDto>> GetPost(int id)
         {
-            if (_context.Posts == null)
+            try
             {
-                return NotFound();
+                return _mapper.Map<PostDto>(await _PostService.GetById(id));
             }
-            var post = await _context.Posts.FindAsync(id);
-
-            if (post == null)
+            catch (PostsNotFoundException e)
             {
-                return NotFound();
+                return NotFound(new ProblemDetails { Detail = e.Message });
             }
-
-            return post;
         }
 
         // PUT: api/Post/5
@@ -94,8 +98,11 @@ namespace BloggersMastersAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Post
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="post"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<PostCreateDto>> PostPost(PostCreateDto post)
         {

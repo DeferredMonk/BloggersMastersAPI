@@ -27,32 +27,42 @@ namespace BloggersMastersAPI.Services.Classes
 
         public async Task<IEnumerable<Post>> GetAll()
         {
-            var Posts = await _context.Posts
+            var posts = await _context.Posts
                 .Include(p => p.User)
                 .ToListAsync();
-            if (!Posts.Any())
+            if (!posts.Any())
             {
                 throw new PostsNotFoundException();
             }
-            return Posts;
+            return posts;
         }
 
         public async Task<ICollection<Post>> GetAllUserPostsByUserId(int id)
         {
-            var Posts = await _context.Posts
+            var posts = await _context.Posts
                 .Include(p => p.User)
                 .Where(p => p.UserId == id)
                 .ToListAsync();
-            if (!Posts.Any())
+            if (!posts.Any())
             {
                 throw new PostsNotFoundException();
             }
-            return Posts;
+            return posts;
         }
 
-        public Task<Post> GetById(int id)
+        public async Task<Post> GetById(int id)
         {
-            throw new NotImplementedException();
+            var post = await _context.Posts
+                .Include(p => p.User)
+                .Where(p => p.Id == id)
+                .SingleOrDefaultAsync();
+
+            if (post == null)
+            {
+                throw new PostsNotFoundException();
+            }
+
+            return post;
         }
 
         public Task<Post> Update(Post entity)
