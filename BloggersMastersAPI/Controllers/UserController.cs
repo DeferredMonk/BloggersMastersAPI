@@ -38,14 +38,18 @@ namespace BloggersMastersAPI.Controllers
             }
         }
         /// <summary>
-        /// Gets one users from the database based on ID
+        /// Gets one users from the database based on ID or username
         /// </summary>
         /// <returns>the searched user</returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserDto>> GetUserById(int id)
+        public async Task<ActionResult<UserDto>> GetUserByIdOrUsername(int id, string username)
         {
             try
             {
+                if (id == 0)
+                {
+                    return Ok(_mapper.Map<UserDto>(await _userService.GetByUsername(username)));
+                }
                 return Ok(_mapper.Map<UserDto>(await _userService.GetById(id)));
             }
             catch (UserNotFoundException e)
