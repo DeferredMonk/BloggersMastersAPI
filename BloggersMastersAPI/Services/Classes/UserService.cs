@@ -48,7 +48,15 @@ namespace BloggersMastersAPI.Services.Classes
 
             return user != null ? user : throw new UserNotFoundException();
         }
+        public async Task<User> GetByUsername(string username)
+        {
+            var user = await _context.Users
+                .Include(u => u.Posts)
+                .Where(u => u.username == username)
+                .SingleOrDefaultAsync();
 
+            return user != null ? user : throw new UserNotFoundException();
+        }
         public Task<User> Update(JsonPatchDocument entity, int Id)
         {
             throw new NotImplementedException();
