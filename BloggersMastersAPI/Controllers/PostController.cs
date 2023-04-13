@@ -81,15 +81,23 @@ namespace BloggersMastersAPI.Controllers
                 return NotFound(new ProblemDetails { Detail = e.Message });
             }
         }
-
-        // PUT: api/Post/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Updates a resource with given data
+        /// </summary>
+        /// <param name="id">Id of the resource</param>
+        /// <param name="post">what do add</param>
+        /// <param name="target">targeted part of object</param>
+        /// <returns>Updated resource</returns>
         [HttpPatch("{id}")]
-        public async Task<ActionResult<PostDto>> PatchPost(int id, JsonPatchDocument post)
+        public async Task<ActionResult<PostModifyDto>> PatchPost(int id, JsonPatchDocument post, string target)
         {
             try
             {
-                return Ok(_mapper.Map<PostDto>(await _PostService.Update(post, id)));
+                if (target == "likes")
+                {
+                    return Ok(_mapper.Map<PostModifyDto>(await _PostService.UpdateLikes(post, id)));
+                }
+                return Ok(_mapper.Map<PostModifyDto>(await _PostService.Update(post, id)));
             }
             catch (Exception)
             {

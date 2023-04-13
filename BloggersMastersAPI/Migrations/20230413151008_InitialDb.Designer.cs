@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BloggersMastersAPI.Migrations
 {
     [DbContext(typeof(BloggersMastersContext))]
-    [Migration("20230409124908_InitialDb")]
+    [Migration("20230413151008_InitialDb")]
     partial class InitialDb
     {
         /// <inheritdoc />
@@ -71,9 +71,8 @@ namespace BloggersMastersAPI.Migrations
                             Id = 1,
                             Agrees = 0,
                             Content = "One of my greatest achiements is winning a league game!",
-                            CreatedAt = new DateTime(2023, 4, 9, 15, 49, 7, 963, DateTimeKind.Local).AddTicks(6540),
+                            CreatedAt = new DateTime(2023, 4, 13, 18, 10, 8, 439, DateTimeKind.Local).AddTicks(6344),
                             Disagrees = 0,
-                            ModifiedAt = new DateTime(2023, 4, 9, 15, 49, 7, 963, DateTimeKind.Local).AddTicks(6575),
                             PublicPost = false,
                             Title = "My greatest achievements",
                             UserId = 1
@@ -83,9 +82,8 @@ namespace BloggersMastersAPI.Migrations
                             Id = 2,
                             Agrees = 0,
                             Content = "I've currently spent a month looking for a job as a web dev. Lets hope this is the one.",
-                            CreatedAt = new DateTime(2023, 4, 9, 15, 49, 7, 963, DateTimeKind.Local).AddTicks(6584),
+                            CreatedAt = new DateTime(2023, 4, 13, 18, 10, 8, 439, DateTimeKind.Local).AddTicks(6394),
                             Disagrees = 0,
-                            ModifiedAt = new DateTime(2023, 4, 9, 15, 49, 7, 963, DateTimeKind.Local).AddTicks(6586),
                             PublicPost = true,
                             Title = "Job hunting",
                             UserId = 1
@@ -95,9 +93,8 @@ namespace BloggersMastersAPI.Migrations
                             Id = 3,
                             Agrees = 0,
                             Content = "Today I printed hello world to my console, I felt like a hacker!",
-                            CreatedAt = new DateTime(2023, 4, 9, 15, 49, 7, 963, DateTimeKind.Local).AddTicks(6590),
+                            CreatedAt = new DateTime(2023, 4, 13, 18, 10, 8, 439, DateTimeKind.Local).AddTicks(6396),
                             Disagrees = 0,
-                            ModifiedAt = new DateTime(2023, 4, 9, 15, 49, 7, 963, DateTimeKind.Local).AddTicks(6591),
                             PublicPost = true,
                             Title = "Hello world!",
                             UserId = 2
@@ -107,9 +104,8 @@ namespace BloggersMastersAPI.Migrations
                             Id = 4,
                             Agrees = 0,
                             Content = "Finally I master the skills of C#, its time to apply for amazing opportunities!",
-                            CreatedAt = new DateTime(2023, 4, 9, 15, 49, 7, 963, DateTimeKind.Local).AddTicks(6593),
+                            CreatedAt = new DateTime(2023, 4, 13, 18, 10, 8, 439, DateTimeKind.Local).AddTicks(6398),
                             Disagrees = 0,
-                            ModifiedAt = new DateTime(2023, 4, 9, 15, 49, 7, 963, DateTimeKind.Local).AddTicks(6595),
                             PublicPost = true,
                             Title = "I just finished Noroff's bootcamp!",
                             UserId = 3
