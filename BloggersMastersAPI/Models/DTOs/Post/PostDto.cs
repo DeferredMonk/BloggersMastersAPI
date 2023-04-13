@@ -1,6 +1,4 @@
-﻿using BloggersMastersAPI.Models.DTOs.User;
-
-namespace BloggersMastersAPI.Models.DTOs.Post
+﻿namespace BloggersMastersAPI.Models.DTOs.Post
 {
     public class PostDto
     {

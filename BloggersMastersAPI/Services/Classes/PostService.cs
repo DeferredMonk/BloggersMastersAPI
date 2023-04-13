@@ -70,6 +70,16 @@ namespace BloggersMastersAPI.Services.Classes
         public async Task<Post> Update(JsonPatchDocument entity, int Id)
         {
             var postToUpdate = await GetById(Id);
+            postToUpdate.ModifiedAt = DateTime.Now;
+            entity.ApplyTo(postToUpdate);
+            await _context.SaveChangesAsync();
+
+            return postToUpdate;
+        }
+
+        public async Task<Post> UpdateLikes(JsonPatchDocument entity, int Id)
+        {
+            var postToUpdate = await GetById(Id);
             entity.ApplyTo(postToUpdate);
             await _context.SaveChangesAsync();
 
