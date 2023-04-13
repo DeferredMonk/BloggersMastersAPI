@@ -69,10 +69,10 @@ namespace BloggersMastersAPI.Migrations
                 columns: new[] { "Id", "Agrees", "Content", "CreatedAt", "Disagrees", "ModifiedAt", "PublicPost", "Title", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 0, "One of my greatest achiements is winning a league game!", new DateTime(2023, 4, 9, 15, 49, 7, 963, DateTimeKind.Local).AddTicks(6540), 0, new DateTime(2023, 4, 9, 15, 49, 7, 963, DateTimeKind.Local).AddTicks(6575), false, "My greatest achievements", 1 },
-                    { 2, 0, "I've currently spent a month looking for a job as a web dev. Lets hope this is the one.", new DateTime(2023, 4, 9, 15, 49, 7, 963, DateTimeKind.Local).AddTicks(6584), 0, new DateTime(2023, 4, 9, 15, 49, 7, 963, DateTimeKind.Local).AddTicks(6586), true, "Job hunting", 1 },
-                    { 3, 0, "Today I printed hello world to my console, I felt like a hacker!", new DateTime(2023, 4, 9, 15, 49, 7, 963, DateTimeKind.Local).AddTicks(6590), 0, new DateTime(2023, 4, 9, 15, 49, 7, 963, DateTimeKind.Local).AddTicks(6591), true, "Hello world!", 2 },
-                    { 4, 0, "Finally I master the skills of C#, its time to apply for amazing opportunities!", new DateTime(2023, 4, 9, 15, 49, 7, 963, DateTimeKind.Local).AddTicks(6593), 0, new DateTime(2023, 4, 9, 15, 49, 7, 963, DateTimeKind.Local).AddTicks(6595), true, "I just finished Noroff's bootcamp!", 3 }
+                    { 1, 0, "One of my greatest achiements is winning a league game!", new DateTime(2023, 4, 13, 18, 10, 8, 439, DateTimeKind.Local).AddTicks(6344), 0, null, false, "My greatest achievements", 1 },
+                    { 2, 0, "I've currently spent a month looking for a job as a web dev. Lets hope this is the one.", new DateTime(2023, 4, 13, 18, 10, 8, 439, DateTimeKind.Local).AddTicks(6394), 0, null, true, "Job hunting", 1 },
+                    { 3, 0, "Today I printed hello world to my console, I felt like a hacker!", new DateTime(2023, 4, 13, 18, 10, 8, 439, DateTimeKind.Local).AddTicks(6396), 0, null, true, "Hello world!", 2 },
+                    { 4, 0, "Finally I master the skills of C#, its time to apply for amazing opportunities!", new DateTime(2023, 4, 13, 18, 10, 8, 439, DateTimeKind.Local).AddTicks(6398), 0, null, true, "I just finished Noroff's bootcamp!", 3 }
                 });
 
             migrationBuilder.CreateIndex(
