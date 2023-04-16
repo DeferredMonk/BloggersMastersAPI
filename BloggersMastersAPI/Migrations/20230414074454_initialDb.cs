@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BloggersMastersAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialDb : Migration
+    public partial class initialDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -69,10 +69,10 @@ namespace BloggersMastersAPI.Migrations
                 columns: new[] { "Id", "Agrees", "Content", "CreatedAt", "Disagrees", "ModifiedAt", "PublicPost", "Title", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 0, "One of my greatest achiements is winning a league game!", new DateTime(2023, 4, 13, 18, 10, 8, 439, DateTimeKind.Local).AddTicks(6344), 0, null, false, "My greatest achievements", 1 },
-                    { 2, 0, "I've currently spent a month looking for a job as a web dev. Lets hope this is the one.", new DateTime(2023, 4, 13, 18, 10, 8, 439, DateTimeKind.Local).AddTicks(6394), 0, null, true, "Job hunting", 1 },
-                    { 3, 0, "Today I printed hello world to my console, I felt like a hacker!", new DateTime(2023, 4, 13, 18, 10, 8, 439, DateTimeKind.Local).AddTicks(6396), 0, null, true, "Hello world!", 2 },
-                    { 4, 0, "Finally I master the skills of C#, its time to apply for amazing opportunities!", new DateTime(2023, 4, 13, 18, 10, 8, 439, DateTimeKind.Local).AddTicks(6398), 0, null, true, "I just finished Noroff's bootcamp!", 3 }
+                    { 1, 0, "One of my greatest achiements is winning a league game!", new DateTime(2023, 4, 14, 10, 44, 54, 480, DateTimeKind.Local).AddTicks(6957), 0, null, false, "My greatest achievements", 1 },
+                    { 2, 0, "I've currently spent a month looking for a job as a web dev. Lets hope this is the one.", new DateTime(2023, 4, 14, 10, 44, 54, 480, DateTimeKind.Local).AddTicks(7001), 0, null, true, "Job hunting", 1 },
+                    { 3, 0, "Today I printed hello world to my console, I felt like a hacker!", new DateTime(2023, 4, 14, 10, 44, 54, 480, DateTimeKind.Local).AddTicks(7004), 0, null, true, "Hello world!", 2 },
+                    { 4, 0, "Finally I master the skills of C#, its time to apply for amazing opportunities!", new DateTime(2023, 4, 14, 10, 44, 54, 480, DateTimeKind.Local).AddTicks(7005), 0, null, true, "I just finished Noroff's bootcamp!", 3 }
                 });
 
             migrationBuilder.CreateIndex(

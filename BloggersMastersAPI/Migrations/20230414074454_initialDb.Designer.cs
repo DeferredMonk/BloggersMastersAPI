@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BloggersMastersAPI.Migrations
 {
     [DbContext(typeof(BloggersMastersContext))]
-    [Migration("20230413151008_InitialDb")]
-    partial class InitialDb
+    [Migration("20230414074454_initialDb")]
+    partial class initialDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,7 +71,7 @@ namespace BloggersMastersAPI.Migrations
                             Id = 1,
                             Agrees = 0,
                             Content = "One of my greatest achiements is winning a league game!",
-                            CreatedAt = new DateTime(2023, 4, 13, 18, 10, 8, 439, DateTimeKind.Local).AddTicks(6344),
+                            CreatedAt = new DateTime(2023, 4, 14, 10, 44, 54, 480, DateTimeKind.Local).AddTicks(6957),
                             Disagrees = 0,
                             PublicPost = false,
                             Title = "My greatest achievements",
@@ -82,7 +82,7 @@ namespace BloggersMastersAPI.Migrations
                             Id = 2,
                             Agrees = 0,
                             Content = "I've currently spent a month looking for a job as a web dev. Lets hope this is the one.",
-                            CreatedAt = new DateTime(2023, 4, 13, 18, 10, 8, 439, DateTimeKind.Local).AddTicks(6394),
+                            CreatedAt = new DateTime(2023, 4, 14, 10, 44, 54, 480, DateTimeKind.Local).AddTicks(7001),
                             Disagrees = 0,
                             PublicPost = true,
                             Title = "Job hunting",
@@ -93,7 +93,7 @@ namespace BloggersMastersAPI.Migrations
                             Id = 3,
                             Agrees = 0,
                             Content = "Today I printed hello world to my console, I felt like a hacker!",
-                            CreatedAt = new DateTime(2023, 4, 13, 18, 10, 8, 439, DateTimeKind.Local).AddTicks(6396),
+                            CreatedAt = new DateTime(2023, 4, 14, 10, 44, 54, 480, DateTimeKind.Local).AddTicks(7004),
                             Disagrees = 0,
                             PublicPost = true,
                             Title = "Hello world!",
@@ -104,7 +104,7 @@ namespace BloggersMastersAPI.Migrations
                             Id = 4,
                             Agrees = 0,
                             Content = "Finally I master the skills of C#, its time to apply for amazing opportunities!",
-                            CreatedAt = new DateTime(2023, 4, 13, 18, 10, 8, 439, DateTimeKind.Local).AddTicks(6398),
+                            CreatedAt = new DateTime(2023, 4, 14, 10, 44, 54, 480, DateTimeKind.Local).AddTicks(7005),
                             Disagrees = 0,
                             PublicPost = true,
                             Title = "I just finished Noroff's bootcamp!",

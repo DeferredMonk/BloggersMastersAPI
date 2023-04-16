@@ -116,7 +116,7 @@ namespace BloggersMastersAPI.Controllers
             try
             {
                 var newPost = await _PostService.Create(_mapper.Map<Post>(post));
-                return Created("GetPost", newPost);
+                return Created("GetPost", _mapper.Map<PostDto>(newPost));
             }
             catch (Exception e)
             {
@@ -145,11 +145,6 @@ namespace BloggersMastersAPI.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }
-
-        private bool PostExists(int id)
-        {
-            return (_context.Posts?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

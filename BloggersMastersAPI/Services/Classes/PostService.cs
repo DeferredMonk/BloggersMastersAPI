@@ -18,7 +18,13 @@ namespace BloggersMastersAPI.Services.Classes
         {
             await _context.Posts.AddAsync(entity);
             await _context.SaveChangesAsync();
-            return entity;
+
+            var newUser = await _context.Posts
+                .Include(x => x.User)
+                .Where(x => x.Id == entity.Id)
+                .SingleOrDefaultAsync();
+
+            return newUser;
         }
 
         public Task DeleteById(int id)
